@@ -456,6 +456,12 @@ done
 .proc draw_score
     lda #0
     jsr rowaddr
+    ; Clear all 40 columns of the score row first (text mode = $00 is space)
+    lda #0
+    ldy #39
+clr sta (ptr),y
+    dey
+    bpl clr
     ldx #0
     ldy #1
 @   lda t_score,x
